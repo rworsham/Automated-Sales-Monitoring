@@ -1,4 +1,4 @@
-import smtplib, ssl
+import smtplib
 from email.message import EmailMessage
 import time
 import os
@@ -23,39 +23,34 @@ class Send:
         server.quit()
 
 class Check:
-    def path(self):
-        subfolders = [sub.path for sub in os.scandir("./") if sub.is_dir()]
-        for count in subfolders:
-
-            return subfolders
-
     def grab(self, filepath):
         self.filepath = filepath
         if os.path.exists(filepath):
-            polled_sales.append(f"{filepath} has polled!")
-        else:
-            pass
-
-
-check = Check()
-check.grab("1/STORESALES01.TXT")
-check.grab("2/STORESALES02.TXT")
-check.grab("3/STORESALES03.TXT")
-check.grab("4/STORESALES04.TXT")
-check.grab("5/STORESALES05.TXT")
-
+            if filepath not in polled_sales:
+                polled_sales.append(filepath)
+                print(polled_sales)
+            else:
+                pass
 
 
 while True:
     current_time = time.strftime("%H:%M")
-    if current_time == "13:57":
+    check = Check()
+    check.grab("1/STORESALES01.TXT")
+    check.grab("2/STORESALES02.TXT")
+    check.grab("3/STORESALES03.TXT")
+    check.grab("4/STORESALES04.TXT")
+    check.grab("5/STORESALES05.TXT")
+    print("Polling Folders Checked")
+    time.sleep(10)
+    if current_time == "16:12":
         send = Send()
-        print(polled_sales)
-        print(check.path())
         string_convert = str(polled_sales)
         message = f"""
         Below is the list of Stores that have polled, compare the list below to the spreadsheet and proceed accordingly. \n
         {polled_sales}
+        
+        -R
         """
         print("process completed")
         send.email(message)
