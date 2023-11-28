@@ -42,8 +42,8 @@ while True:
     check.grab("4/STORESALES04.TXT")
     check.grab("5/STORESALES05.TXT")
     print("Polling Folders Checked")
-    time.sleep(10)
-    if current_time == "16:12":
+    time.sleep(30)
+    if current_time == "17:30":
         send = Send()
         string_convert = str(polled_sales)
         message = f"""

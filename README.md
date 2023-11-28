@@ -1,6 +1,6 @@
 # What is this?
 
-### This program will check if the designated folder has a new/updated file in its directory.In the case where there is not a new/updated file it will email an address notifying that sales did not come in for the location
+### This program will check if the designated folder has a new/updated file in its directory. It will then store this information and send an email of the completed files to the helpdesk email.
 
 # Why is this needed?
 
