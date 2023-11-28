@@ -43,18 +43,19 @@ while True:
     check.grab("5/STORESALES05.TXT")
     print("Polling Folders Checked")
     time.sleep(30)
-    if current_time == "17:30":
+    if current_time == "09:57":
         send = Send()
-        string_convert = str(polled_sales)
+        polled_sales_data = ("\n".join(polled_sales))
         message = f"""
         Below is the list of Stores that have polled, compare the list below to the spreadsheet and proceed accordingly. \n
-        {polled_sales}
+{polled_sales_data}
         
         -R
         """
         print("process completed")
         send.email(message)
         time.sleep(60)
+        exit()
 
 
 
