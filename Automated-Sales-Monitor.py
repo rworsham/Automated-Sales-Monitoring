@@ -3,9 +3,10 @@ from email.message import EmailMessage
 import time
 import os
 
-
+#Created and tested by R. Worsham
 
 polled_sales = []
+
 
 class Send:
     def email(self, message):
@@ -13,14 +14,15 @@ class Send:
         msg = EmailMessage()
         msg.set_content(message)
 
-        msg['Subject'] = 'Test Sales'
-        msg['From'] = "dalcomsalesmonitor@gmail.com"
-        msg['To'] = "rworsham@dalcom.com"
+        msg['Subject'] = 'Gastonia & Mt.Holly Sales'
+        msg['From'] = "Dalcom Sales Monitor"
+        msg['To'] = "support@dalcom.com"
 
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
         server.login("dalcomsalesmonitor@gmail.com", "uclt cmdg ksuw wego")
         server.send_message(msg)
         server.quit()
+
 
 class Check:
     def grab(self, filepath):
@@ -36,23 +38,23 @@ class Check:
 while True:
     current_time = time.strftime("%H:%M")
     check = Check()
-    check.grab("1/STORESALES01.TXT")
-    check.grab("2/STORESALES02.TXT")
-    check.grab("3/STORESALES03.TXT")
-    check.grab("4/STORESALES04.TXT")
-    check.grab("5/STORESALES05.TXT")
+    check.grab("../INVMH/IN/STORE001.TXT")
+    check.grab("../INV/IN/1/STORE001.TXT")
+    check.grab("../INV/IN/2/STORE002.TXT")
+    check.grab("../INV/IN/3/STORE003.TXT")
+    check.grab("../INV/IN/4/STORE004.TXT")
+    check.grab("../INV/IN/6/STORE006.TXT")
     print("Polling Folders Checked")
-    time.sleep(30)
-    if current_time == "09:57":
+    time.sleep(5)
+    if current_time == "21:40":
         send = Send()
         polled_sales_data = ("\n".join(polled_sales))
         message = f"""
-        Below is the list of Stores that have polled, compare the list below to the spreadsheet and proceed accordingly. \n
+        Below is the list of Stores that have polled, compare the list below to the spreadsheet and proceed accordingly. 
 {polled_sales_data}
         
-        -R
         """
-        print("process completed")
+        print("Sending Email now, Goodnight!")
         send.email(message)
         time.sleep(60)
         exit()
