@@ -14,11 +14,12 @@ class Send:
         msg = EmailMessage()
         msg.set_content(message)
 
-        msg['Subject'] = 'Orange Sales'
+        msg['Subject'] = 'Gastonia & Mt.Holly Sales'
         msg['From'] = "Dalcom Sales Monitor"
         msg['To'] = "rworsham@dalcom.com"
 
-        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
         server.login("dalcomsalesmonitor@gmail.com", "uclt cmdg ksuw wego")
         server.send_message(msg)
         server.quit()
@@ -38,27 +39,22 @@ class Check:
 while True:
     current_time = time.strftime("%H:%M")
     check = Check()
+    check.grab("../INVMH/IN/STORE001.TXT")
     check.grab("../INV/IN/1/STORE001.TXT")
     check.grab("../INV/IN/2/STORE002.TXT")
     check.grab("../INV/IN/3/STORE003.TXT")
     check.grab("../INV/IN/4/STORE004.TXT")
-    check.grab("../INV/IN/5/STORE005.TXT")
     check.grab("../INV/IN/6/STORE006.TXT")
-    check.grab("../INV/IN/7/STORE007.TXT")
-    check.grab("../INV/IN/8/STORE008.TXT")
-    check.grab("../INV/IN/9/STORE009.TXT")
-    check.grab("../INV/IN/10/STORE010.TXT")
     print("Polling Folders Checked")
     time.sleep(5)
-    if current_time == "22:45":
+    if current_time == "10:25":
         send = Send()
         polled_sales_data = ("\n".join(polled_sales))
         number_of_sales = len(polled_sales)
-        print(number_of_sales)
         message = f"""
         Below is the list of Stores that have polled, compare the list below to the spreadsheet and proceed accordingly. 
-        
-        Results Returned: {number_of_sales}                 Expected: 9
+
+        Results Returned: {number_of_sales}                 Expected: 7
 
 {polled_sales_data}
         
