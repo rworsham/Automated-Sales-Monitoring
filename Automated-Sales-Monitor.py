@@ -16,7 +16,7 @@ class Send:
 
         msg['Subject'] = 'Gastonia & Mt.Holly Sales'
         msg['From'] = "Dalcom Sales Monitor"
-        msg['To'] = "rworsham@dalcom.com"
+        msg['To'] = "helpdesk@dalcom.com"
 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
@@ -47,14 +47,14 @@ while True:
     check.grab("../INV/IN/6/STORE006.TXT")
     print("Polling Folders Checked")
     time.sleep(5)
-    if current_time == "10:25":
+    if current_time == "22:00":
         send = Send()
         polled_sales_data = ("\n".join(polled_sales))
         number_of_sales = len(polled_sales)
         message = f"""
         Below is the list of Stores that have polled, compare the list below to the spreadsheet and proceed accordingly. 
 
-        Results Returned: {number_of_sales}                 Expected: 7
+        Results Returned: {number_of_sales}                 Expected: 6
 
 {polled_sales_data}
         
