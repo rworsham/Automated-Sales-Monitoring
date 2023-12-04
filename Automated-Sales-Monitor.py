@@ -3,14 +3,13 @@ from email.message import EmailMessage
 import time
 import os
 
-#Created and tested by R. Worsham
+# Created and tested by R. Worsham
 
 polled_sales = []
 
 
 class Send:
     def email(self, message):
-
         msg = EmailMessage()
         msg.set_content(message)
 
@@ -39,15 +38,16 @@ class Check:
 while True:
     current_time = time.strftime("%H:%M")
     check = Check()
-    check.grab("../INVMH/IN/STORE001.TXT")
-    check.grab("../INV/IN/1/STORE001.TXT")
-    check.grab("../INV/IN/2/STORE002.TXT")
-    check.grab("../INV/IN/3/STORE003.TXT")
-    check.grab("../INV/IN/4/STORE004.TXT")
-    check.grab("../INV/IN/6/STORE006.TXT")
+    check.grab("C:\\INVMH\\IN\\STORE001.TXT")
+    check.grab("C:\\INV\\IN\\1\\STORE001.TXT")
+    check.grab("C:\\INV\\IN\\2\\STORE002.TXT")
+    check.grab("C:\\INV\\IN\\3\\STORE003.TXT")
+    check.grab("C:\\INV\\IN\\4\\STORE004.TXT")
+    check.grab("C:\\INV\\IN\\6\\STORE006.TXT")
     print("Polling Folders Checked")
     time.sleep(5)
-    if current_time == "22:00":
+
+    if current_time == "22:00" or len(polled_sales) == 6:
         send = Send()
         polled_sales_data = ("\n".join(polled_sales))
         number_of_sales = len(polled_sales)
@@ -57,13 +57,9 @@ while True:
         Results Returned: {number_of_sales}                 Expected: 6
 
 {polled_sales_data}
-        
+
         """
         print("Sending Email now, Goodnight!")
         send.email(message)
         time.sleep(60)
         exit()
-
-
-
-
