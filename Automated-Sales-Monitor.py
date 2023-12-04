@@ -16,7 +16,7 @@ class Send:
 
         msg['Subject'] = 'Orange Sales'
         msg['From'] = "Dalcom Sales Monitor"
-        msg['To'] = "helpdesk@dalcom.com"
+        msg['To'] = "rworsham@dalcom.com"
 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
@@ -39,19 +39,19 @@ class Check:
 while True:
     current_time = time.strftime("%H:%M")
     check = Check()
-    check.grab("../INV/IN/1/STORE001.TXT")
-    check.grab("../INV/IN/2/STORE002.TXT")
-    check.grab("../INV/IN/3/STORE003.TXT")
-    check.grab("../INV/IN/4/STORE004.TXT")
-    check.grab("../INV/IN/5/STORE005.TXT")
-    check.grab("../INV/IN/6/STORE006.TXT")
-    check.grab("../INV/IN/7/STORE007.TXT")
-    check.grab("../INV/IN/8/STORE008.TXT")
-    check.grab("../INV/IN/9/STORE009.TXT")
-    check.grab("../INV/IN/10/STORE010.TXT")
+    check.grab("C:\\INV\\IN\\1\\STORE001.TXT")
+    check.grab("C:\\INV\\IN\\2\\STORE002.TXT")
+    check.grab("C:\\INV\\IN\\3\\STORE003.TXT")
+    check.grab("C:\\INV\\IN\\4\\STORE004.TXT")
+    check.grab("C:\\INV\\IN\\5\\STORE005.TXT")
+    check.grab("C:\\INV\\IN\\6\\STORE006.TXT")
+    check.grab("C:\\INV\\IN\\7\\STORE007.TXT")
+    check.grab("C:\\INV\\IN\\8\\STORE008.TXT")
+    check.grab("C:\\INV\\IN\\10\\STORE010.TXT")
+
     print("Polling Folders Checked")
     time.sleep(5)
-    if current_time == "22:45":
+    if current_time == "22:45" or len(polled_sales) == 9:
         send = Send()
         polled_sales_data = ("\n".join(polled_sales))
         number_of_sales = len(polled_sales)
