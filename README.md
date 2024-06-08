@@ -4,7 +4,7 @@
 
 # Why is this needed?
 
-### This program should shorten the amount of time needed to verify sales have imported and stores have closed by automating the process.
+### This program shortens the amount of time needed to verify sales have imported and stores have closed by automating the process.
 
 # Planned implementation/Research
 
